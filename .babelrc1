@@ -3,8 +3,10 @@
   "env": {
     "development": {
       "plugins": [
-        "react-transform"
+       "react-transform"
+
       ],
+
       "extra": {
         "react-transform": {
           "transforms": [{

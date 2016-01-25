@@ -15,3 +15,25 @@ export function finishMove(){
   return {type: types.FINISH_MOVE};
 }
 
+export function playerNameChange(event){
+  var value = event.target.value;
+  return {type:types.NAME_CHANGE, value};
+}
+export function savePlayerName(){
+  return {type:types.SAVE_NAME};
+}
+export function socketHandler(state,action){
+  console.log("socket action", state,action);
+  return {type:action.type, state, action};
+}
+export function gameNameChanged(event){
+  var value = event.target.value;
+  return {type:types.GAME_NAME_CHANGE,value};
+}
+export function createGame(){
+  return {type:types.CREATE_GAME};
+}
+export function joinGame(gameName){
+  return {type:types.JOIN_GAME,gameName};
+}
+

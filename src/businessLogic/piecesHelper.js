@@ -1,4 +1,4 @@
-var pieces = [];
+
 const totalColors = 5;
 const totalShapes = 5;
 const totalEachCategory = 3;
@@ -6,16 +6,19 @@ const colors = ['red','blue','green','yellow','orange','purple'];
 const shapes=['circle','certificate','heart','square','cloud','star'];
 export default class PiecesHelper{
 
-  constructor(){
-    this._buildPiecesBag();
+
+  static initialPieces(){
+    return this._buildPiecesBag();
+
   }
-  getNextPiece(){
+  static getNextPiece(pieces){
     let indexOfPiece = Math.floor(Math.random()*pieces.length);
     let piece = pieces[indexOfPiece];
     pieces.splice(indexOfPiece,1);
-    return piece;
+    return {piece:piece,pieces:pieces};
   }
-  _buildPiecesBag(){
+  static _buildPiecesBag(){
+    var pieces = [];
    for (var color=0;color<=totalColors;color++) {
      for(var shape=0;shape<=totalShapes;shape++){
        for (var eachCategory=1;eachCategory<=totalEachCategory;eachCategory++){
@@ -24,8 +27,9 @@ export default class PiecesHelper{
        }
      }
    }
+    return pieces;
   }
-  getRemainingPieces(){
+  static getRemainingPieces(pieces){
     var piecesLeft={};
     shapes.map((s)=>{
       piecesLeft[s]={};
@@ -38,4 +42,5 @@ export default class PiecesHelper{
     });
     return piecesLeft;
   }
+
 }

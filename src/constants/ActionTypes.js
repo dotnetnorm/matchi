@@ -4,3 +4,16 @@ export const SELECT_PIECE = "SELECT_PIECE";
 export const PLACE_PIECE  = "PLACE_PIECE";
 export const UNDO_MOVE = "UNDO_MOVE";
 export const FINISH_MOVE = "FINISH_MOVE";
+export const NAME_CHANGE = "NAME_CHANGE";
+export const SAVE_NAME = "SAVE_NAME";
+export const CREATE_GAME ="CREATE_GAME";
+export const GAME_CREATED = "GAME_CREATED";
+export const MOVE_UNDONE = "MOVE_UNDONE";
+export const GET_AWAITING_GAMES = "GET_AWAITING_GAMES";
+export const GAMES_AWAITING = "GAMES_AWAITING";
+export const PIECE_SELECTED = "PIECE_SELECTED";
+export const PLAYER_MOVED = "PLAYER_MOVED";
+export const MOVE_FINISHED = "MOVE_FINISHED";
+export const GAME_NAME_CHANGE = "GAME_NAME_CHANGE";
+export const JOIN_GAME = "JOIN_GAME";
+
