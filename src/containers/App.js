@@ -52,7 +52,7 @@ class App extends React.Component {
     const { gameState, actions } = this.props;
     console.log("app state", this.props);
     return (<div>{
-    gameState.gameStarted ?
+    gameState.gameStarted ? 
         <Game game={gameState.game} currentPlayer={gameState.currentPlayer} actions={actions} moveScore={gameState.moveScore} remaining={gameState.remainingPieces}/>
       : <Main playerInfo={gameState.playerInfo} actions={actions} />}
       {gameState.awaitingGames != null ? <AwaitingGames games={gameState.awaitingGames} actions={actions} playerInfo={gameState.playerInfo} /> : <div></div>}</div>
