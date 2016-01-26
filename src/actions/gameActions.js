@@ -36,4 +36,7 @@ export function createGame(){
 export function joinGame(gameName){
   return {type:types.JOIN_GAME,gameName};
 }
+export function gameStarted(game){
+  return {type:types.GAME_STARTED,game}
+}
 
