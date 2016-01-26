@@ -9,7 +9,7 @@ var Redis = require('ioredis');
 var redis = new Redis();
 var gamesAwaiting=[];
 var gamesInProgress = [];
-var types = require("./src/constants/nodeActionTypes");
+import * as types from "./src/constants/ActionTypes";
 import  Game from "./src/businessLogic/gameHelper";
 
 app.use(express.static(path.join(__dirname, './dist')));
@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
             var playerName = state.gameState.playerInfo.name;
             var game=Game.createGame(gameName,playerName);
             game = Game.addPlayer(game,playerName);
-            console.log("game created", game);
+
             gamesAwaiting.push(game);
             action.games = gamesAwaiting;
             action.type = types.GAMES_AWAITING;
@@ -40,13 +40,23 @@ io.on('connection', function (socket) {
             var playerName = state.gameState.playerInfo.name;
             var gameIndex = gamesAwaiting.findIndex(x=>x.gameName==gameName);
             var game = gamesAwaiting[gameIndex];
+            console.log("got game", game);
             game = Game.addPlayer(game,playerName);
             gamesAwaiting[gameIndex] = game;
+
             action.games = gamesAwaiting;
             action.type = types.GAMES_AWAITING;
             socket.join(gameName);
-            socket.broadcast.emit("socketHandler",state,action);
+
+            io.emit("socketHandler",state,action);
             break;
+      case types.START_GAME:
+            var gameName= action.gameName;
+            var gameIndex = gamesAwaiting.findIndex(x=>x.gameName==gameName);
+            var game = gamesAwaiting[gameIndex];
+            game = Game.startGame(game);
+
+
       case types.GET_AWAITING_GAMES:
            action.type = types.GAMES_AWAITING;
            action.games = gamesAwaiting;

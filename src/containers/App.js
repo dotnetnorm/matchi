@@ -19,14 +19,19 @@ var Main = (props) =>{
 };
 var GameListItem = (props) => {
   const {game,playerInfo,actions} = props;
+  const players = Object.keys(game.players).map((key)=>{return game.players[key].playerName});
+  console.log(players);
   return (<li className="list-group-item">
               <div><h3>{game.gameName}</h3></div>
               <div>Started By {game.creator}</div>
+              <div>Current Number Of Players: {game.numberOfPlayers}</div>
+              <div>{Object.keys(game.players).map((key)=>{return (<span>{game.players[key].playerName}  </span>)})}</div>
               <div>
 
                 {(game.creator == playerInfo.name) && (game.numberOfPlayers>1) ? <button type="button" className="btn btn-info">Start Game</button> :
+                  players.indexOf(playerInfo.name) > -1 ? <div>Waiting for more players</div> :
                   game.creator != playerInfo.name ?  <button type="button" className="btn btn-primary" onClick={actions.joinGame.bind(null,game.gameName)}>Join</button> :
-                  <div>Waiting for more players</div>}
+                 <div></div> }
 
 
               </div>
@@ -52,7 +57,7 @@ class App extends React.Component {
     const { gameState, actions } = this.props;
     console.log("app state", this.props);
     return (<div>{
-    gameState.gameStarted ? 
+    gameState.gameStarted ?
         <Game game={gameState.game} currentPlayer={gameState.currentPlayer} actions={actions} moveScore={gameState.moveScore} remaining={gameState.remainingPieces}/>
       : <Main playerInfo={gameState.playerInfo} actions={actions} />}
       {gameState.awaitingGames != null ? <AwaitingGames games={gameState.awaitingGames} actions={actions} playerInfo={gameState.playerInfo} /> : <div></div>}</div>
